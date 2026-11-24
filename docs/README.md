@@ -5,6 +5,8 @@
 | 当前已实现与尚未实现的能力 | [status.md](status.md) |
 | 近期研究与系统建设任务 | [roadmap.md](roadmap.md) |
 | 系统职责与数据路径 | [架构概览](architecture/overview.md) |
+| CPU SoC、AXI 矩阵、启动和复位 | [CPU SoC 架构](architecture/cpu-soc.md) |
+| Vivado Tcl、板卡配置、JTAG 下载 | [FPGA SoC 指南](howto/fpga-soc.md) |
 | CPU 接入条件 | [CPU 接口](interfaces/cpu.md) |
 | 当前地址空间与后续分配规则 | [地址映射](interfaces/memory-map.md) |
 | 加速器控制/数据接口的设计起点 | [接口草案](interfaces/accelerator.md) |

@@ -7,7 +7,14 @@
 NEMU 差分接入。该平台是 CPU 基线，尚无加速器或真实外设。
 
 `compare` 模式选择 CPU 仓库的 `MiniPerfTop`，连接 CPU 基线实验的 AXI4 性能模型。
-`fpga` 模式生成带 CPU 仓库 RAM 黑盒的核 RTL，仍需板卡适配和实际 IP。
+`fpga` 模式保留 CPU 子项目原 FPGA 配置。新增 `soc` 模式生成从 DDR 起始地址复位的
+CPU 核，与 `hardware/soc/rtl/` 的 AXI/复位/寄存器模块集成。
+
+## CPU SoC 起步平台
+
+第一版为 CPU 和 JTAG AXI 双主设备，连接 AXI 矩阵、DDR、系统控制、LED 与 UART。
+Vivado 项目和 IP 由 Tcl 创建，板卡资源待填写。详细结构与启动边界见
+[CPU SoC 架构](cpu-soc.md)，构建方式见 [FPGA 指南](../howto/fpga-soc.md)。
 
 ## 目标系统（规划）
 

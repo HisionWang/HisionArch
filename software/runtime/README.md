@@ -6,3 +6,8 @@
 
 应用 Makefile 在定义 `NAME`、`SRCS`、`HEADERS` 后包含 `../../runtime/app.mk`。
 当前运行环境对应仿真地址图，尚未提供真实 UART、DMA 或 SD 卡驱动。
+
+## FPGA SoC
+
+`soc/` 包含独立的 DDR 启动文件和链接脚本，通过 `soc_demo` 构建。它不使用仿真
+console/完成通知，真实 UART/LED 操作在 `software/drivers/soc/`。

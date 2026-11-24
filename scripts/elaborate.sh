@@ -4,9 +4,15 @@ source "$(dirname -- "${BASH_SOURCE[0]}")/common.sh"
 case ${1:-} in
   emu) mode=emu; top=core_top; output="$RTL_DIR/emu" ;;
   compare) mode=compare; top=MiniPerfTop; output="$RTL_DIR/compare/mini" ;;
+  soc) mode=soc; top=core_top; output="$RTL_DIR/soc" ;;
   fpga) mode=fpga; top=core_top; output="$RTL_DIR/fpga" ;;
-  *) die "Usage: $0 emu|compare|fpga" ;;
+  *) die "Usage: $0 emu|compare|fpga|soc" ;;
 esac
+if [[ $mode == soc ]]; then
+  python3 "$HISION_ROOT/scripts/soc-config.py" --out "$BUILD_DIR/soc"
+  export SOC_RESET_PC
+  SOC_RESET_PC=$(python3 "$HISION_ROOT/scripts/soc-config.py" --get reset_pc)
+fi
 bash "$HISION_ROOT/scripts/deps.sh"
 find_sbt
 mkdir -p "$BUILD_DIR"
@@ -20,7 +26,7 @@ key=$(fingerprint --value "$mode,$SBT,$cpu_revision" \
   "$HISION_ROOT/hardware/soc" "$HISION_ROOT/hardware/memory" \
   "$HISION_ROOT/hardware/common" "$HISION_ROOT/hardware/platform" "$HISION_ROOT/build.sbt" \
   "$properties" "$HISION_ROOT/scripts/elaborate.sh" \
-  "$HISION_ROOT/scripts/common.sh")
+  "$HISION_ROOT/scripts/common.sh" "$HISION_ROOT/scripts/soc-config.py")
 if [[ -f "$output/$top.v" && -f "$output/.source-hash" &&
       $(<"$output/.source-hash") == "$key" ]]; then
   echo "Reusing $mode RTL: $output"

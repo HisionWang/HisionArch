@@ -1,5 +1,7 @@
 # 驱动
 
-这里保存后续的加速器、DMA 和 SoC 外设驱动，当前尚无实现。
-驱动与硬件共同遵循 `docs/interfaces/` 中的寄存器、错误、地址和同步约定。
-应用通过驱动调用硬件；独立基准程序与数据生成逻辑放在 `software/apps/`。
+`soc/soc.h`、`soc/soc.c` 提供首版 SoC 的 32 位 MMIO、UART 轮询、LED 逻辑掩码和
+周期计数访问。寄存器地址来自生成的 `hision_soc_map.h`，GPIO/UART 逻辑寄存器间隔
+为 8 字节；它与默认 Vivado 裸机驱动的偏移不同。
+
+示例为 `software/apps/soc_demo/`。后续在这里增加加速器控制、DMA 和数据所有权协议。

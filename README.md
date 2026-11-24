@@ -10,7 +10,8 @@ CPU 为作者自研的 [miniXiangShan](https://github.com/XiangShanLab/miniXiang
 ## 当前能力
 
 已有 CPU 仿真构建、NEMU 差分接入、裸机 hello/CoreMark 与双 CPU 基线实验。
-加速器、DMA、完整 SoC、板卡工程、PCB 与外壳目前处于规划阶段。
+新增 CPU SoC 集成 RTL、AXI 矩阵与 Vivado Tcl 构建流程，包含 JTAG/DDR 启动、
+LED 和真实 UART；板卡资源待填写，尚未综合或上板。加速器、DMA、PCB 与外壳仍在规划中。
 具体范围见 [当前状态](docs/status.md) 与 [路线图](docs/roadmap.md)。
 
 ## 开始使用
@@ -62,7 +63,18 @@ make app APP=coremark ITERATIONS=10
 make cpu-baseline APP=coremark
 ```
 
-`MODE=fpga` 仅生成核 RTL，尚未提供可烧录的整机工程。
+基础 SoC 使用以下入口：
+
+```bash
+make soc-rtl
+make soc-app
+make fpga-check  # 默认模板预期报缺少板卡资源
+# 填写真实 target.tcl 后：
+make fpga-project TARGET=fpga/targets/<board>/target.tcl
+```
+
+系统设计见 [CPU SoC 架构](docs/architecture/cpu-soc.md)，板卡配置、Tcl 构建与 JTAG
+启动见 [FPGA SoC 指南](docs/howto/fpga-soc.md)。`MODE=fpga` 保留旧的 CPU RTL 配置。
 双 CPU 比较的计时与公平性边界见
 [实验方法](experiments/cpu-baseline/METHODOLOGY.md)。
 

@@ -1,5 +1,10 @@
 # 应用构建
 
+`soc_demo/` 使用真实 UART/LED 和独立的 SoC 启动环境，运行 `make soc-app` 构建，
+通过 JTAG 下载到板卡；见 [FPGA 指南](../../docs/howto/fpga-soc.md)。它不使用下面的
+仿真 console 与完成协议，也不加入 CPU 对比。以下说明针对 `hello`、`coremark`
+以及基于仿真运行库的新应用。
+
 每个 `software/apps/<name>/` 都是独立应用目录。进入目录执行 `make` 只构建应用，
 完成后打印手动运行示例：
 

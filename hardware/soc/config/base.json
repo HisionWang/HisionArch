@@ -1,0 +1,22 @@
+{
+  "name": "hision_cpu_soc_v1",
+  "reset_pc": "0x80000000",
+  "ddr_base": "0x80000000",
+  "sysctrl_base": "0x40000000",
+  "gpio_base": "0x40010000",
+  "uart_base": "0x40020000",
+  "peripheral_span": "0x00010000",
+  "sys_id": "0x48495331",
+  "sys_id_offset": "0x00",
+  "sys_control_offset": "0x08",
+  "sys_status_offset": "0x10",
+  "sys_scratch_offset": "0x18",
+  "sys_clock_hz_offset": "0x20",
+  "gpio_data_offset": "0x00",
+  "gpio_tri_offset": "0x08",
+  "uart_rx_offset": "0x00",
+  "uart_tx_offset": "0x08",
+  "uart_status_offset": "0x10",
+  "uart_control_offset": "0x18",
+  "sys_board_io_offset": "0x28"
+}

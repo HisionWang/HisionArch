@@ -6,9 +6,9 @@ import minixiangshan.config._
 
 /** Project-owned elaboration boundary; CPU internals remain in the submodule. */
 object Generate extends App {
-  require(args.length <= 1, "Usage: Generate [emu|compare|fpga]")
+  require(args.length <= 1, "Usage: Generate [emu|compare|fpga|soc]")
   val mode = args.headOption.getOrElse("emu")
-  require(Set("emu", "compare", "fpga").contains(mode), s"Unknown mode: $mode")
+  require(Set("emu", "compare", "fpga", "soc").contains(mode), s"Unknown mode: $mode")
   val output = new File(sys.env.getOrElse("RTL_DIR", "build/rtl"),
     if (mode == "compare") "compare/mini" else mode)
   require(output.isDirectory || output.mkdirs(), s"Cannot create $output")
@@ -16,8 +16,10 @@ object Generate extends App {
   implicit val parameters: Parameters = new Parameters(Map(
     DebugConfigKeys.EnableDifftest -> (mode == "emu"),
     DebugConfigKeys.DifftestUseDPI -> false,
-    DebugConfigKeys.UseBehavioralMemories -> (mode != "fpga"),
-    CoreConfigKeys.ResetPC -> (if (mode == "fpga") CoreConfigKeys.ResetPC.default
+    DebugConfigKeys.UseBehavioralMemories -> (!Set("fpga", "soc").contains(mode)),
+    CoreConfigKeys.ResetPC -> (if (mode == "soc")
+      BigInt(sys.env("SOC_RESET_PC").stripPrefix("0x"), 16)
+      else if (mode == "fpga") CoreConfigKeys.ResetPC.default
       else BigInt("80000000", 16)),
     CoreConfigKeys.XLEN -> 64
   ))
