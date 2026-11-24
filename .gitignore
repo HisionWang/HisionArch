@@ -1,0 +1,53 @@
+# External source checkouts
+/.deps/
+
+# Scala / sbt / IDE
+.bsp/
+.bloop/
+.metals/
+.idea/
+/.sbt-global/
+/.sbt-run/
+/.ivy2/
+target/
+# Keep project/build.properties; ignore only sbt caches
+/project/*
+!/project/build.properties
+*.class
+
+# Generated RTL and build products
+/out/
+/out-perf/
+/build/
+/obj_dir/
+/test_run_dir/
+/software/apps/*/build/
+/experiments/*/build/
+/hardware/**/build/
+/fpga/**/build/
+/.build.lock
+/study
+# Reproducible experiment output; keep the directory placeholder
+/experiments/*/results/*
+!/experiments/*/results/.gitkeep
+/experiments/*/runs/
+
+# Python tooling caches
+__pycache__/
+*.py[cod]
+/.pytest_cache/
+
+# Simulation waveforms
+*.vcd
+*.vcd.gz
+*.fst
+*.vpd
+*.fsdb
+
+# Editor and OS files
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db

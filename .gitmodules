@@ -1,0 +1,3 @@
+[submodule "miniXiangShan"]
+	path = hardware/cpu/miniXiangShan
+	url = https://github.com/XiangShanLab/miniXiangShan.git
